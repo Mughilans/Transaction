@@ -7,7 +7,7 @@ const Transaction = () => {
     const [balance, setBalance] = useState(500);
     const [amount, setAmount] = useState(50);
     const [transactions, setTransactions] = useState([])
-
+    console.log(balance)
     const addClick = () => {
         const newbalance = balance + Number(amount);
         setBalance(newbalance)
@@ -18,18 +18,25 @@ const Transaction = () => {
         }
         const updateTransaction = [...transactions, transaction];
         setTransactions(updateTransaction);
+        console.log("addclick")
     }
 
     const removeClick = () => {
-        const newbalance = balance - Number(amount);
-        setBalance(newbalance)
-        const transaction = {
-            date: new Date(),
-            type: 'Remove',
-            amount,
+        if (balance > Number(amount)) {
+            const newbalance = balance - Number(amount);
+            setBalance(newbalance)
+            const transaction = {
+                date: new Date(),
+                type: 'Remove',
+                amount,
+            }
+            const updateTransaction = [...transactions, transaction];
+            setTransactions(updateTransaction);
         }
-        const updateTransaction = [...transactions, transaction];
-        setTransactions(updateTransaction);
+        else {
+            alert("Do not enter value more than balance")
+        }
+        console.log("removeclick")
     }
 
     return (
